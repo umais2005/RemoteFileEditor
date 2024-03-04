@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% if not files%}
+        <div>
+            <h1 style="text-align: center; ">No files to show!</h1>
+        </div>
+    {% else %}
+        {% for file in files %}
+        <div style="border-color: black;">
+        <article style="text-align: center; margin-top: 30px;" class="media content-section">
+          <div class="media-body" >
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ file.author.username }}</a>
+              <small class="text-muted">{{ file.date_modified.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="url_for('update',file_id=file.id)">{{ file.filename }}</a></h2>
+            </div>
+           </div>
+        </article>
+        {% endfor %}
+    {% endif %}
+    <a href="{{ url_for('create') }}" class="btn btn-primary">Create New File</a>
+    
+{% endblock content %}
